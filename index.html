@@ -18,7 +18,6 @@
     --bg-color: #f4f4f6;
     --surface: #ffffff;
     --surface-hover: #f9fafb;
-    --surface-raised: #ffffff;
     --text-main: #111827;
     --text-muted: #6b7280;
     --text-faint: #9ca3af;
@@ -36,7 +35,6 @@
     --toast-fg: #ffffff;
     --modal-bg: rgba(17, 24, 39, 0.55);
 }
-
 [data-theme="dark"] {
     --primary: #00b3b3;
     --primary-hover: #00c8c8;
@@ -46,7 +44,6 @@
     --bg-color: #0d1117;
     --surface: #1f2937;
     --surface-hover: #374151;
-    --surface-raised: #232e3f;
     --text-main: #f9fafb;
     --text-muted: #9ca3af;
     --text-faint: #6b7280;
@@ -72,14 +69,9 @@ html, body {
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-body {
-    padding-bottom: 120px;
-    min-height: 100vh;
-}
+body { padding-bottom: 120px; min-height: 100vh; }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   HEADER
-   ═══════════════════════════════════════════════════════════════════════ */
+/* Header */
 .header {
     display: flex; justify-content: space-between; align-items: center;
     padding: 22px 22px 14px;
@@ -87,31 +79,20 @@ body {
 }
 .brand { display: flex; align-items: center; gap: 14px; }
 .brand-mark {
-    width: 38px; height: 38px;
-    border-radius: 10px;
+    width: 38px; height: 38px; border-radius: 10px;
     background: var(--primary);
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 0 24px var(--primary-glow), 0 2px 6px rgba(0,0,0,0.15);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
 }
 .brand-mark::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(circle at 30% 25%,
-        rgba(255,255,255,0.5), transparent 55%);
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.5), transparent 55%);
     pointer-events: none;
 }
 .brand-mark svg { width: 22px; height: 22px; color: #fff; position: relative; z-index: 1; }
-.brand h1 {
-    margin: 0; font-size: 1.35rem; font-weight: 700;
-    letter-spacing: -0.5px; line-height: 1.1;
-}
-.brand p {
-    margin: 2px 0 0; font-size: 0.72rem; font-weight: 600;
-    color: var(--text-muted); letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
+.brand h1 { margin: 0; font-size: 1.35rem; font-weight: 700; letter-spacing: -0.5px; line-height: 1.1; }
+.brand p  { margin: 2px 0 0; font-size: 0.72rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
 .theme-btn {
     width: 42px; height: 42px; border-radius: 10px;
     background: var(--surface); border: 1px solid var(--border);
@@ -123,42 +104,29 @@ body {
 .theme-btn:active { transform: scale(0.94); }
 .theme-btn svg { width: 20px; height: 20px; }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   HERO (currently selected effect)
-   ═══════════════════════════════════════════════════════════════════════ */
+/* Hero */
 .hero {
     position: relative;
-    max-width: 720px;
-    margin: 6px auto 22px;
+    max-width: 720px; margin: 6px auto 22px;
     padding: 26px 22px 22px;
 }
-/* Colored glow bleeding out from behind the preview */
 .hero::before {
     content: '';
-    position: absolute;
-    top: 40px; left: 50%;
+    position: absolute; top: 40px; left: 50%;
     width: 340px; height: 340px;
     transform: translateX(-50%);
     background: radial-gradient(circle,
-        var(--hero-glow, rgba(0,153,153,0.25)) 0%,
-        transparent 62%);
-    pointer-events: none;
-    filter: blur(24px);
-    opacity: 0.9;
-    z-index: 0;
+        var(--hero-glow, rgba(0,153,153,0.25)) 0%, transparent 62%);
+    pointer-events: none; filter: blur(24px); opacity: 0.9; z-index: 0;
     transition: background 0.6s ease;
 }
 .hero-inner {
     position: relative; z-index: 1;
-    display: flex; flex-direction: column; align-items: center;
-    text-align: center;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
 }
-
 .hero-preview {
-    position: relative;
-    width: 200px; height: 200px;
-    border-radius: 26px;
-    overflow: hidden;
+    position: relative; width: 200px; height: 200px;
+    border-radius: 26px; overflow: hidden;
     background: #000;
     box-shadow:
         var(--shadow-lg),
@@ -166,63 +134,35 @@ body {
         inset 0 1px 0 rgba(255,255,255,0.10);
     isolation: isolate;
 }
-.hero-preview canvas {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    display: block;
-}
-/* White-diffuser glass overlay */
+.hero-preview canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .hero-preview::after {
-    content: '';
-    position: absolute; inset: 0;
-    z-index: 2; pointer-events: none;
-    border-radius: inherit;
+    content: ''; position: absolute; inset: 0;
+    z-index: 2; pointer-events: none; border-radius: inherit;
     background: linear-gradient(135deg,
-        rgba(255,255,255,0.09) 0%,
-        rgba(255,255,255,0.02) 40%,
-        rgba(0,0,0,0.05) 100%);
+        rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.02) 40%, rgba(0,0,0,0.05) 100%);
     box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
 }
 .hero-preview::before {
-    content: '';
-    position: absolute;
-    top: 5%; left: 6%;
-    width: 28%; height: 22%;
-    z-index: 3; pointer-events: none;
-    border-radius: 50%;
-    background: radial-gradient(circle at center,
-        rgba(255,255,255,0.22), transparent 65%);
-    opacity: 0.85;
-    filter: blur(3px);
+    content: ''; position: absolute;
+    top: 5%; left: 6%; width: 28%; height: 22%;
+    z-index: 3; pointer-events: none; border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.22), transparent 65%);
+    opacity: 0.85; filter: blur(3px);
 }
-
 .hero-meta { margin-top: 22px; }
 .hero-cat {
     display: inline-block;
     padding: 3px 10px;
     font-size: 0.68rem; font-weight: 700;
     letter-spacing: 0.7px; text-transform: uppercase;
-    color: var(--primary);
-    background: var(--primary-soft);
-    border-radius: 999px;
-    margin-bottom: 10px;
+    color: var(--primary); background: var(--primary-soft);
+    border-radius: 999px; margin-bottom: 10px;
 }
-.hero-name {
-    margin: 0 0 4px; font-size: 1.65rem; font-weight: 700;
-    letter-spacing: -0.6px; line-height: 1.15;
-}
-.hero-desc {
-    margin: 0; font-size: 0.9rem; line-height: 1.5;
-    color: var(--text-muted); max-width: 320px;
-}
+.hero-name { margin: 0 0 4px; font-size: 1.65rem; font-weight: 700; letter-spacing: -0.6px; line-height: 1.15; }
+.hero-desc { margin: 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-muted); max-width: 320px; }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   BRIGHTNESS
-   ═══════════════════════════════════════════════════════════════════════ */
-.brightness-card {
-    max-width: 720px; margin: 0 auto 18px;
-    padding: 0 22px;
-}
+/* Brightness */
+.brightness-card { max-width: 720px; margin: 0 auto 18px; padding: 0 22px; }
 .brightness-card .label {
     display: flex; justify-content: space-between; align-items: center;
     font-size: 0.72rem; font-weight: 700;
@@ -233,59 +173,81 @@ body {
 input[type=range] {
     -webkit-appearance: none; appearance: none;
     width: 100%; height: 8px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    outline: none; cursor: pointer;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; outline: none; cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
     width: 22px; height: 22px; border-radius: 50%;
-    background: var(--primary);
-    border: 3px solid var(--surface);
+    background: var(--primary); border: 3px solid var(--surface);
     box-shadow: 0 0 0 1px var(--border), 0 2px 8px rgba(0,0,0,0.15), 0 0 12px var(--primary-glow);
-    cursor: pointer;
-    transition: transform 0.15s ease;
+    cursor: pointer; transition: transform 0.15s ease;
 }
 input[type=range]::-webkit-slider-thumb:active { transform: scale(1.12); }
 input[type=range]::-moz-range-thumb {
     width: 22px; height: 22px; border-radius: 50%;
-    background: var(--primary);
-    border: 3px solid var(--surface);
+    background: var(--primary); border: 3px solid var(--surface);
     box-shadow: 0 0 0 1px var(--border), 0 0 12px var(--primary-glow);
     cursor: pointer;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   CATEGORY PILLS
-   ═══════════════════════════════════════════════════════════════════════ */
+/* Custom color card */
+.custom-color-wrap {
+    max-width: 720px; margin: 0 auto;
+    padding: 0 22px 12px;
+}
+.color-item {
+    position: relative;
+    cursor: pointer;
+}
+.color-item input[type=color] {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0; border: none; padding: 0;
+    cursor: pointer;
+    z-index: 5;
+}
+.color-thumb {
+    background-color: #ff8040;   /* overridden by JS */
+    transition: background-color 0.15s linear;
+}
+/* Slight extra glow on the swatch to hint it's interactive */
+.color-item .color-thumb::after {
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 -1px 0 rgba(0,0,0,0.30);
+}
+.color-hint {
+    font-size: 0.68rem; font-weight: 700;
+    color: var(--text-faint);
+    letter-spacing: 0.4px; text-transform: uppercase;
+    white-space: nowrap;
+    padding-right: 6px;
+}
+[data-theme="dark"] .color-hint { color: var(--text-faint); }
+
+/* Category pills */
 .cat-wrap {
     position: sticky; top: 0; z-index: 20;
     background: linear-gradient(to bottom,
-        var(--bg-color) 0%,
-        var(--bg-color) 78%,
-        transparent 100%);
+        var(--bg-color) 0%, var(--bg-color) 78%, transparent 100%);
     padding: 14px 0 16px;
     transition: background 0.3s ease;
 }
 .cat-bar {
-    display: flex; gap: 8px;
-    padding: 0 22px;
-    overflow-x: auto;
-    scrollbar-width: none;
+    display: flex; gap: 8px; padding: 0 22px;
+    overflow-x: auto; scrollbar-width: none;
     max-width: 720px; margin: 0 auto;
 }
 .cat-bar::-webkit-scrollbar { display: none; }
 .cat-pill {
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: var(--surface);
-    border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--border);
     color: var(--text-muted);
     font-size: 0.82rem; font-weight: 600;
-    letter-spacing: 0.1px;
-    cursor: pointer;
+    letter-spacing: 0.1px; cursor: pointer;
     white-space: nowrap; flex-shrink: 0;
     transition: all 0.2s ease;
     font-family: inherit;
@@ -297,16 +259,12 @@ input[type=range]::-moz-range-thumb {
     box-shadow: 0 0 14px var(--primary-glow);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   LIST
-   ═══════════════════════════════════════════════════════════════════════ */
+/* Effect list */
 .list-wrap {
     max-width: 720px; margin: 0 auto;
     padding: 0 22px;
-    display: flex; flex-direction: column;
-    gap: 10px;
+    display: flex; flex-direction: column; gap: 10px;
 }
-
 .effect-item {
     display: flex; align-items: center; gap: 14px;
     padding: 10px 14px 10px 10px;
@@ -317,29 +275,19 @@ input[type=range]::-moz-range-thumb {
     transition: transform 0.18s ease, border-color 0.22s ease, box-shadow 0.22s ease, background-color 0.3s ease;
     box-shadow: var(--shadow-card);
     user-select: none; -webkit-user-select: none;
-    min-width: 0;
-    position: relative;
-    overflow: hidden;
+    min-width: 0; position: relative; overflow: hidden;
 }
 .effect-item::before {
     content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--primary);
-    transform: scaleY(0);
-    transform-origin: center;
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--primary);
+    transform: scaleY(0); transform-origin: center;
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.effect-item:hover {
-    transform: translateY(-1px);
-    border-color: var(--border-soft);
-}
+.effect-item:hover { transform: translateY(-1px); border-color: var(--border-soft); }
 .effect-item.selected {
     border-color: var(--primary);
-    background: linear-gradient(to right,
-        var(--primary-soft) 0%,
-        var(--surface) 35%);
+    background: linear-gradient(to right, var(--primary-soft) 0%, var(--surface) 35%);
     box-shadow: var(--shadow-card), 0 0 0 1px var(--primary);
 }
 .effect-item.selected::before { transform: scaleY(1); }
@@ -347,29 +295,20 @@ input[type=range]::-moz-range-thumb {
 .thumb {
     position: relative;
     width: 68px; height: 68px;
-    border-radius: 12px;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: #000;
+    border-radius: 12px; overflow: hidden;
+    flex-shrink: 0; background: #000;
     isolation: isolate;
     box-shadow:
         inset 0 0 0 1px rgba(255,255,255,0.06),
         0 1px 3px rgba(0,0,0,0.15);
 }
-.thumb canvas {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    display: block;
-}
+.thumb canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .thumb::after {
     content: '';
     position: absolute; inset: 0;
-    z-index: 2; pointer-events: none;
-    border-radius: inherit;
+    z-index: 2; pointer-events: none; border-radius: inherit;
     background: linear-gradient(135deg,
-        rgba(255,255,255,0.07) 0%,
-        rgba(255,255,255,0.01) 45%,
-        rgba(0,0,0,0.04) 100%);
+        rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.01) 45%, rgba(0,0,0,0.04) 100%);
     box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
 }
 
@@ -385,12 +324,9 @@ input[type=range]::-moz-range-thumb {
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     line-height: 1.3;
 }
-
 .check {
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: var(--primary);
-    color: #fff;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--primary); color: #fff;
     display: none; align-items: center; justify-content: center;
     flex-shrink: 0;
     font-size: 13px; font-weight: 900;
@@ -403,31 +339,21 @@ input[type=range]::-moz-range-thumb {
 }
 .effect-item.selected .check { display: flex; }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SEND BUTTON
-   ═══════════════════════════════════════════════════════════════════════ */
+/* FAB */
 .fab {
-    position: fixed;
-    bottom: 24px; left: 50%;
-    transform: translateX(-50%);
-    z-index: 40;
-    padding: 0 22px;
-    width: 100%; max-width: 420px;
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%); z-index: 40;
+    padding: 0 22px; width: 100%; max-width: 420px;
     pointer-events: none;
 }
 .fab button {
-    pointer-events: auto;
-    width: 100%;
-    padding: 17px 26px;
-    border-radius: 14px; border: none;
-    background: var(--primary);
-    color: #fff;
+    pointer-events: auto; width: 100%;
+    padding: 17px 26px; border-radius: 14px; border: none;
+    background: var(--primary); color: #fff;
     font-size: 0.95rem; font-weight: 700;
-    letter-spacing: 0.2px;
-    cursor: pointer;
+    letter-spacing: 0.2px; cursor: pointer;
     font-family: inherit;
-    display: flex; align-items: center; justify-content: center;
-    gap: 10px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
     box-shadow:
         0 8px 28px var(--primary-glow),
         0 4px 10px rgba(0,0,0,0.15),
@@ -443,9 +369,7 @@ input[type=range]::-moz-range-thumb {
 .fab button:active { transform: scale(0.97); }
 .fab button svg { width: 18px; height: 18px; }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   MODAL
-   ═══════════════════════════════════════════════════════════════════════ */
+/* Modal */
 .modal {
     position: fixed; inset: 0; z-index: 200;
     display: flex; align-items: center; justify-content: center;
@@ -462,8 +386,7 @@ input[type=range]::-moz-range-thumb {
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 30px 26px 24px;
-    width: 100%; max-width: 340px;
-    text-align: center;
+    width: 100%; max-width: 340px; text-align: center;
     transform: scale(0.95);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
     box-shadow: var(--shadow-lg);
@@ -474,8 +397,7 @@ input[type=range]::-moz-range-thumb {
     margin: 0 auto 18px;
     display: flex; align-items: center; justify-content: center;
     border-radius: 50%;
-    background: var(--primary-soft);
-    color: var(--primary);
+    background: var(--primary-soft); color: var(--primary);
 }
 .modal-icon svg { width: 30px; height: 30px; }
 .modal-icon.pulse { animation: nfc-pulse 1.4s ease-in-out infinite; }
@@ -483,42 +405,28 @@ input[type=range]::-moz-range-thumb {
     0%, 100% { box-shadow: 0 0 0 0 var(--primary-glow); }
     50%      { box-shadow: 0 0 0 16px rgba(0,180,180,0); }
 }
-.modal h2 {
-    margin: 0 0 8px; font-size: 1.2rem; font-weight: 700;
-    letter-spacing: -0.3px; color: var(--text-main);
-}
-.modal p {
-    margin: 0 0 22px; font-size: 0.88rem; line-height: 1.55;
-    color: var(--text-muted);
-}
+.modal h2 { margin: 0 0 8px; font-size: 1.2rem; font-weight: 700; letter-spacing: -0.3px; color: var(--text-main); }
+.modal p { margin: 0 0 22px; font-size: 0.88rem; line-height: 1.55; color: var(--text-muted); }
 .modal button {
-    width: 100%; padding: 14px;
-    border-radius: 10px; border: none;
+    width: 100%; padding: 14px; border-radius: 10px; border: none;
     background: var(--primary); color: #fff;
-    font-size: 0.92rem; font-weight: 700;
-    cursor: pointer;
+    font-size: 0.92rem; font-weight: 700; cursor: pointer;
     font-family: inherit;
 }
 .modal button.ghost {
-    background: transparent;
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-    margin-top: 8px;
+    background: transparent; color: var(--text-muted);
+    border: 1px solid var(--border); margin-top: 8px;
     transition: background 0.15s ease;
 }
 .modal button.ghost:hover { background: var(--surface-hover); }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   TOAST
-   ═══════════════════════════════════════════════════════════════════════ */
+/* Toast */
 #toast {
-    position: fixed;
-    top: 20px; left: 50%;
+    position: fixed; top: 20px; left: 50%;
     transform: translate(-50%, -12px);
     z-index: 999;
     padding: 13px 22px;
-    background: var(--toast-bg);
-    color: var(--toast-fg);
+    background: var(--toast-bg); color: var(--toast-fg);
     border-radius: 10px;
     font-size: 0.85rem; font-weight: 600;
     box-shadow: var(--shadow-lg);
@@ -527,15 +435,11 @@ input[type=range]::-moz-range-thumb {
     white-space: nowrap; max-width: 90vw;
     overflow: hidden; text-overflow: ellipsis;
 }
-#toast.show {
-    opacity: 1; visibility: visible;
-    transform: translate(-50%, 0);
-}
+#toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════ HEADER ═════════════════════ -->
 <div class="header">
     <div class="brand">
         <div class="brand-mark">
@@ -556,12 +460,9 @@ input[type=range]::-moz-range-thumb {
     </button>
 </div>
 
-<!-- ═══════════════════════════════════════ HERO ══════════════════════ -->
 <section class="hero" id="hero">
     <div class="hero-inner">
-        <div class="hero-preview">
-            <canvas id="heroCanvas"></canvas>
-        </div>
+        <div class="hero-preview"><canvas id="heroCanvas"></canvas></div>
         <div class="hero-meta">
             <div class="hero-cat" id="heroCat">Ambient</div>
             <h2 class="hero-name" id="heroName">Aurora</h2>
@@ -570,7 +471,6 @@ input[type=range]::-moz-range-thumb {
     </div>
 </section>
 
-<!-- ══════════════════════════════════ BRIGHTNESS ═════════════════════ -->
 <div class="brightness-card">
     <div class="label">
         <span>Brightness</span>
@@ -579,17 +479,28 @@ input[type=range]::-moz-range-thumb {
     <input type="range" id="brightness" min="0" max="100" value="80" aria-label="Brightness">
 </div>
 
-<!-- ═══════════════════════════════════ CATEGORIES ════════════════════ -->
+<!-- Custom color card -->
+<div class="custom-color-wrap">
+    <div class="effect-item color-item" id="customColorItem">
+        <div class="thumb color-thumb" id="ccSwatch"></div>
+        <div class="meta">
+            <div class="meta-name">Custom Color</div>
+            <div class="meta-desc" id="ccHex">#ff8040</div>
+        </div>
+        <div class="check">✓</div>
+        <span class="color-hint">Tap</span>
+        <input type="color" id="ccInput" value="#ff8040">
+    </div>
+</div>
+
 <div class="cat-wrap">
     <nav class="cat-bar" id="catBar"></nav>
 </div>
 
-<!-- ════════════════════════════════════════ LIST ═════════════════════ -->
 <main>
     <div class="list-wrap" id="list"></div>
 </main>
 
-<!-- ════════════════════════════════════════ FAB ══════════════════════ -->
 <div class="fab">
     <button id="syncBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -602,7 +513,6 @@ input[type=range]::-moz-range-thumb {
     </button>
 </div>
 
-<!-- ════════════════════════════════════ MODAL ════════════════════════ -->
 <div class="modal" id="syncModal">
     <div class="modal-content">
         <div class="modal-icon pulse">
@@ -624,9 +534,9 @@ input[type=range]::-moz-range-thumb {
 <script>
 'use strict';
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    MATH HELPERS
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
 const N = 16;
 const TAU = Math.PI * 2;
 const PI  = Math.PI;
@@ -681,9 +591,17 @@ function hsv2rgb(h, s, v) {
 }
 function wrap01(u) { return u - Math.floor(u); }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   LED GEOMETRY (square ring, clockwise from top-left)
-   ═══════════════════════════════════════════════════════════════════════ */
+function hexToRgb(hex) {
+    return {
+        r: parseInt(hex.slice(1, 3), 16),
+        g: parseInt(hex.slice(3, 5), 16),
+        b: parseInt(hex.slice(5, 7), 16),
+    };
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   LED GEOMETRY
+   ══════════════════════════════════════════════════════════════════════ */
 const LED_POS = [
     [0.20,0.15], [0.40,0.15], [0.60,0.15], [0.80,0.15],
     [0.85,0.20], [0.85,0.40], [0.85,0.60], [0.85,0.80],
@@ -691,11 +609,10 @@ const LED_POS = [
     [0.15,0.80], [0.15,0.60], [0.15,0.40], [0.15,0.20],
 ];
 
-/* ═══════════════════════════════════════════════════════════════════════
-   EFFECTS (faithful ports of the WS2812 driver)
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════════
+   EFFECTS — faithful ports of the C driver
+   ══════════════════════════════════════════════════════════════════════ */
 const F = {
-
 void(t, o) {
     const T = t * 0.0003;
     for (let i = 0; i < N; i++) {
@@ -878,8 +795,7 @@ cyberpunk(t, o) {
     const T = t * 0.0015;
     for (let i = 0; i < N; i++) {
         const w = (S(T - i*0.35) + 1) * 0.5;
-        const hue = (128 + w * 85) & 0xff;
-        const [r,g,b] = hsv2rgb(hue, 255, 220);
+        const [r,g,b] = hsv2rgb((128 + w * 85) & 0xff, 255, 220);
         put(o, i, r, g, b);
     }
 },
@@ -905,8 +821,7 @@ cottonCandy(t, o) {
     for (let i = 0; i < N; i++) {
         const x = i * LED_RAD;
         const blend = S(x + T*1.5) * 0.5 + 0.5;
-        const hue = (170 + blend * 75) & 0xff;
-        const [r,g,b] = hsv2rgb(hue, 150, (225 + S(x*2 - T) * 20) | 0);
+        const [r,g,b] = hsv2rgb((170 + blend * 75) & 0xff, 150, (225 + S(x*2 - T) * 20) | 0);
         put(o, i, r, g, b);
     }
 },
@@ -1380,12 +1295,11 @@ photoNeutral(t, o) { for (let i = 0; i < N; i++) put(o, i, 255, 235, 210); },
 photoCool(t, o)    { for (let i = 0; i < N; i++) put(o, i, 210, 235, 255); },
 candle(t, o)       { for (let i = 0; i < N; i++) put(o, i, 255, 160,  70); },
 moonlight(t, o)    { for (let i = 0; i < N; i++) put(o, i, 170, 200, 255); },
-
 };
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    CATEGORIES & EFFECT REGISTRY
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
 const CATEGORIES = [
     { id: 'all',      label: 'All' },
     { id: 'ambient',  label: 'Ambient' },
@@ -1396,7 +1310,6 @@ const CATEGORIES = [
     { id: 'reactive', label: 'Reactive' },
     { id: 'static',   label: 'Static' },
 ];
-
 const CAT_LABEL = {
     ambient: 'Ambient', vivid: 'Vivid', pastel: 'Pastel',
     noir: 'Noir', cosmic: 'Cosmic', reactive: 'Reactive', static: 'Static',
@@ -1411,7 +1324,6 @@ const EFFECTS = [
     { id: 'mermaid',           name: 'Mermaid',           cat: 'ambient',  desc: 'Seafoam, lavender, and pearl',             fn: F.mermaid },
     { id: 'matcha',            name: 'Matcha',            cat: 'ambient',  desc: 'Pale green into cream',                    fn: F.matcha },
     { id: 'mochi',             name: 'Mochi',             cat: 'ambient',  desc: 'Pillowy pastel orbs, mint & peach',        fn: F.mochi },
-
     { id: 'solarFlare',        name: 'Solar Flare',       cat: 'vivid',    desc: 'Boiling sun with white-hot flares',        fn: F.solarFlare },
     { id: 'iridescent',        name: 'Iridescent',        cat: 'vivid',    desc: 'Soap-bubble thin-film interference',       fn: F.iridescent },
     { id: 'miamiVice',         name: 'Miami Vice',        cat: 'vivid',    desc: 'Hot pink & cyan retro blend',              fn: F.miamiVice },
@@ -1420,20 +1332,17 @@ const EFFECTS = [
     { id: 'thunderstorm',      name: 'Thunderstorm',      cat: 'vivid',    desc: 'Stormy indigo with lightning',             fn: F.thunderstorm },
     { id: 'cyberpunk',         name: 'Cyberpunk',         cat: 'vivid',    desc: 'Cyan & magenta two-colour sweep',          fn: F.cyberpunk },
     { id: 'opal',              name: 'Opal',              cat: 'vivid',    desc: 'White stone with pastel flecks',           fn: F.opal },
-
     { id: 'cottonCandy',       name: 'Cotton Candy',      cat: 'pastel',   desc: 'Pink & sky blue spatial weave',            fn: F.cottonCandy },
     { id: 'macaron',           name: 'Macaron',           cat: 'pastel',   desc: 'Five pastel patisserie hues',              fn: F.macaron },
     { id: 'strawberryMilk',    name: 'Strawberry Milk',   cat: 'pastel',   desc: 'Pink desaturating into milk white',        fn: F.strawberryMilk },
     { id: 'blossom',           name: 'Blossom',           cat: 'pastel',   desc: 'Rose petals catching light',               fn: F.blossom },
     { id: 'forest',            name: 'Forest',            cat: 'pastel',   desc: 'Yellow-green into deep green',             fn: F.forest },
-
     { id: 'obsidian',          name: 'Obsidian',          cat: 'noir',     desc: 'Black glass with warm fissures',           fn: F.obsidian },
     { id: 'bloodMoon',         name: 'Blood Moon',        cat: 'noir',     desc: 'Deep crimson with drifting dark spot',     fn: F.bloodMoon },
     { id: 'noir',              name: 'Noir',              cat: 'noir',     desc: 'Black & white high-contrast bands',        fn: F.noir },
     { id: 'ember',             name: 'Ember',             cat: 'noir',     desc: 'Charcoal with pulsing warm coals',         fn: F.ember },
     { id: 'wraith',            name: 'Wraith',            cat: 'noir',     desc: 'Pale wisps on black-navy',                 fn: F.wraith },
     { id: 'galaxy',            name: 'Galaxy',            cat: 'noir',     desc: 'Deep nebular drift with shimmer',          fn: F.galaxy },
-
     { id: 'supernova',         name: 'Supernova',         cat: 'cosmic',   desc: 'Periodic explosion with expanding shell',  fn: F.supernova },
     { id: 'blackHole',         name: 'Black Hole',        cat: 'cosmic',   desc: 'Lensed accretion disk, dark centre',       fn: F.blackHole },
     { id: 'saturnRings',       name: 'Saturn Rings',      cat: 'cosmic',   desc: 'Banded ochre, cream, and pale grey',       fn: F.saturnRings },
@@ -1446,7 +1355,6 @@ const EFFECTS = [
     { id: 'meteorShower',      name: 'Meteor Shower',     cat: 'cosmic',   desc: 'Multiple gold streaks, one direction',     fn: F.meteorShower },
     { id: 'cosmicDust',        name: 'Cosmic Dust',       cat: 'cosmic',   desc: 'Dusty rose & amber nebular cloud',         fn: F.cosmicDust },
     { id: 'orion',             name: 'Orion',             cat: 'cosmic',   desc: 'Constellation of breathing stars',         fn: F.orion },
-
     { id: 'hydrogenAlpha',     name: 'Hydrogen Alpha',    cat: 'reactive', desc: '656 nm deep crimson, slow breath',         fn: F.hydrogenAlpha },
     { id: 'bunsenBurner',      name: 'Bunsen Burner',     cat: 'reactive', desc: 'Blue lab flame with orange sparks',        fn: F.bunsenBurner },
     { id: 'copperSulfate',     name: 'Copper Sulfate',    cat: 'reactive', desc: 'Faceted crystal blue, CuSO₄·5H₂O',         fn: F.copperSulfate },
@@ -1456,7 +1364,6 @@ const EFFECTS = [
     { id: 'iodineVapor',       name: 'Iodine Vapor',      cat: 'reactive', desc: 'Violet I₂ sublimation plumes',             fn: F.iodineVapor },
     { id: 'titration',         name: 'Titration',         cat: 'reactive', desc: 'Phenolphthalein endpoint approaching',     fn: F.titration },
     { id: 'crystalLattice',    name: 'Crystal Lattice',   cat: 'reactive', desc: 'Cold blue-white atomic grid',              fn: F.crystalLattice },
-
     { id: 'photoWarm',         name: 'Photo Warm',        cat: 'static',   desc: '~3200 K tungsten — for photos',            fn: F.photoWarm },
     { id: 'photoNeutral',      name: 'Photo Neutral',     cat: 'static',   desc: '~5600 K daylight — for photos',            fn: F.photoNeutral },
     { id: 'photoCool',         name: 'Photo Cool',        cat: 'static',   desc: '~6500 K cool daylight',                    fn: F.photoCool },
@@ -1464,47 +1371,61 @@ const EFFECTS = [
     { id: 'moonlight',         name: 'Moonlight',         cat: 'static',   desc: 'Cool blue-white moonlight',                fn: F.moonlight },
 ];
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    STATE
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
 const STORE_KEY = 'lumen';
-const state = { selectedId: 'aurora', brightness: 80, theme: 'dark' };
+
+/*
+ * selection can be one of:
+ *   { type: 'effect', id: 'aurora' }
+ *   { type: 'color',  hex: '#ff8040' }
+ */
+const state = {
+    selection: { type: 'effect', id: 'aurora' },
+    brightness: 80,
+    theme: 'dark',
+};
 
 function loadState() {
     try {
         const raw = localStorage.getItem(STORE_KEY);
         if (!raw) return;
         const s = JSON.parse(raw);
-        if (s.selectedId) state.selectedId = s.selectedId;
+        if (s.selection) {
+            state.selection = s.selection;
+        } else if (s.selectedId) {
+            /* Migrate from the old schema */
+            state.selection = { type: 'effect', id: s.selectedId };
+        }
         if (typeof s.brightness === 'number') state.brightness = s.brightness;
         if (s.theme) state.theme = s.theme;
     } catch (e) {}
 }
 function saveState() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch (e) {}
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   RENDERING — white diffuser panel
-   ═══════════════════════════════════════════════════════════════════════
- *   The panel is treated as a translucent white diffuser with the LEDs
- *   behind it. Every LED contributes light across the whole panel with a
- *   smooth Gaussian-ish falloff, so the centre of the ring receives a
- *   moderate sum (not a black hole). The alpha cap (0.65) is tuned so
- *   that 16 full-brightness LEDs sum to ~50 % at the centre.
- */
-const LO_RES       = 32;   /* offscreen render resolution */
-const GLOW_RADIUS  = LO_RES * 0.60;   /* falloff reaches across the whole panel */
+/* ══════════════════════════════════════════════════════════════════════
+   RENDERING (white diffuser panel)
+   ══════════════════════════════════════════════════════════════════════ */
+const LO_RES       = 32;
+const GLOW_RADIUS  = LO_RES * 0.60;
+
+function makeOffscreen() {
+    const c = document.createElement('canvas');
+    c.width = c.height = LO_RES;
+    const ctx = c.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    return { canvas: c, ctx };
+}
 
 function drawFrame(visCtx, offCtx, offCanvas, buf, brightness, visSize) {
-    /* Faint warm base — a white diffuser in a lit room is never pure black */
     offCtx.globalCompositeOperation = 'source-over';
     offCtx.fillStyle = 'rgb(11, 11, 13)';
     offCtx.fillRect(0, 0, LO_RES, LO_RES);
 
-    /* Additive blending: LED glows overlap and physically merge */
     offCtx.globalCompositeOperation = 'lighter';
-
     for (let i = 0; i < N; i++) {
         const r = clampU8(buf[i*3    ] * brightness);
         const g = clampU8(buf[i*3 + 1] * brightness);
@@ -1514,10 +1435,7 @@ function drawFrame(visCtx, offCtx, offCanvas, buf, brightness, visSize) {
         const x = LED_POS[i][0] * LO_RES;
         const y = LED_POS[i][1] * LO_RES;
 
-        /* Wide, soft radial gradient — no hard edge */
         const grad = offCtx.createRadialGradient(x, y, 0, x, y, GLOW_RADIUS);
-
-        /* Alpha tuned so that 16 LEDs sum to ~50 % at the centre */
         grad.addColorStop(0.00, `rgba(${r},${g},${b},0.650)`);
         grad.addColorStop(0.25, `rgba(${r},${g},${b},0.470)`);
         grad.addColorStop(0.50, `rgba(${r},${g},${b},0.200)`);
@@ -1529,26 +1447,15 @@ function drawFrame(visCtx, offCtx, offCanvas, buf, brightness, visSize) {
                         GLOW_RADIUS * 2, GLOW_RADIUS * 2);
     }
 
-    /* Upscale with bilinear interpolation — this is the "diffuser" step.
-       Averaging neighbour pixels on the small canvas is exactly what a
-       physical scattering layer does to light. */
     visCtx.globalCompositeOperation = 'source-over';
     visCtx.imageSmoothingEnabled = true;
     visCtx.imageSmoothingQuality = 'high';
     visCtx.drawImage(offCanvas, 0, 0, LO_RES, LO_RES, 0, 0, visSize, visSize);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   CARD / ROW
-   ═══════════════════════════════════════════════════════════════════════ */
-function makeOffscreen() {
-    const c = document.createElement('canvas');
-    c.width = c.height = LO_RES;
-    const ctx = c.getContext('2d');
-    ctx.imageSmoothingEnabled = true;
-    return { canvas: c, ctx };
-}
-
+/* ══════════════════════════════════════════════════════════════════════
+   ROW FACTORY
+   ══════════════════════════════════════════════════════════════════════ */
 function buildRow(effect) {
     const row = document.createElement('div');
     row.className = 'effect-item';
@@ -1593,9 +1500,9 @@ function buildRow(effect) {
     return cs;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    HERO
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
 const heroCanvas = document.getElementById('heroCanvas');
 const HERO_SIZE  = 260;
 heroCanvas.width = heroCanvas.height = HERO_SIZE;
@@ -1611,23 +1518,66 @@ new IntersectionObserver(entries => {
     for (const e of entries) heroVisible = e.isIntersecting;
 }, { rootMargin: '100px' }).observe(document.getElementById('hero'));
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SINGLE RAF LOOP
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════════
+   CUSTOM COLOR CARD
+   ══════════════════════════════════════════════════════════════════════ */
+const ccItem  = document.getElementById('customColorItem');
+const ccInput = document.getElementById('ccInput');
+const ccSwatch = document.getElementById('ccSwatch');
+const ccHex   = document.getElementById('ccHex');
+
+ccInput.addEventListener('input', e => {
+    const hex = e.target.value;
+    state.selection = { type: 'color', hex };
+    updateColorSwatch();
+    updateSelectionVisuals();
+    saveState();
+});
+
+ccItem.addEventListener('click', e => {
+    /* The native input already captures the click and opens its picker.
+       This handler exists only so the selection state updates even if the
+       user clicks but doesn't change the colour. */
+    if (state.selection.type !== 'color') {
+        const hex = ccInput.value;
+        state.selection = { type: 'color', hex };
+        updateColorSwatch();
+        updateSelectionVisuals();
+        saveState();
+    }
+});
+
+function updateColorSwatch() {
+    const hex = state.selection.type === 'color' ? state.selection.hex : ccInput.value;
+    ccSwatch.style.backgroundColor = hex;
+    ccHex.textContent = hex;
+    ccInput.value = hex;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ANIMATION LOOP
+   ══════════════════════════════════════════════════════════════════════ */
 const cards = new Map();
 const heroEl = document.getElementById('hero');
 
 function animationLoop(now) {
     const bright = state.brightness / 100;
 
-    /* Hero */
+    /* --- Hero --- */
     if (heroVisible) {
         heroElapsed += now - heroLastFrame;
         heroLastFrame = now;
-        heroFn(heroElapsed, heroBuf);
+
+        if (state.selection.type === 'color') {
+            const { r, g, b } = hexToRgb(state.selection.hex);
+            for (let i = 0; i < N; i++) put(heroBuf, i, r, g, b);
+        } else {
+            heroFn(heroElapsed, heroBuf);
+        }
+
         drawFrame(heroCtx, heroOff.ctx, heroOff.canvas, heroBuf, bright, HERO_SIZE);
 
-        /* Update the ambient glow behind the hero to match the panel */
+        /* Ambient glow behind the hero */
         let r = 0, g = 0, b = 0;
         for (let i = 0; i < N; i++) {
             r += heroBuf[i*3]; g += heroBuf[i*3+1]; b += heroBuf[i*3+2];
@@ -1635,11 +1585,10 @@ function animationLoop(now) {
         r = (r / N * bright * 0.55) | 0;
         g = (g / N * bright * 0.55) | 0;
         b = (b / N * bright * 0.55) | 0;
-        heroEl.style.setProperty('--hero-glow',
-            `rgba(${r}, ${g}, ${b}, 0.42)`);
+        heroEl.style.setProperty('--hero-glow', `rgba(${r}, ${g}, ${b}, 0.42)`);
     }
 
-    /* List rows */
+    /* --- List rows --- */
     for (const cs of cards.values()) {
         if (!cs.visible) continue;
         cs.elapsed += now - cs.lastFrame;
@@ -1651,35 +1600,64 @@ function animationLoop(now) {
     requestAnimationFrame(animationLoop);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SELECTION
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════════
+   SELECTION & HERO INFO
+   ══════════════════════════════════════════════════════════════════════ */
+function updateHeroInfo() {
+    const nameEl = document.getElementById('heroName');
+    const descEl = document.getElementById('heroDesc');
+    const catEl  = document.getElementById('heroCat');
+
+    if (state.selection.type === 'color') {
+        nameEl.textContent = 'Custom Color';
+        descEl.textContent = state.selection.hex.toUpperCase();
+        catEl.textContent  = 'Custom';
+    } else {
+        const eff = EFFECTS.find(e => e.id === state.selection.id);
+        if (!eff) return;
+        nameEl.textContent = eff.name;
+        descEl.textContent = eff.desc;
+        catEl.textContent  = CAT_LABEL[eff.cat] || eff.cat;
+    }
+}
+
+function updateSelectionVisuals() {
+    /* List rows */
+    for (const [cid, cs] of cards.entries()) {
+        const isSel = state.selection.type === 'effect' && state.selection.id === cid;
+        cs.row.classList.toggle('selected', isSel);
+    }
+    /* Custom color card */
+    ccItem.classList.toggle('selected', state.selection.type === 'color');
+}
+
 function selectEffect(id) {
-    state.selectedId = id;
+    state.selection = { type: 'effect', id };
     saveState();
 
     const eff = EFFECTS.find(e => e.id === id);
     if (!eff) return;
 
-    /* Restart the hero clock so the effect plays from frame 0 */
     heroFn = eff.fn;
     heroElapsed = 0;
     heroLastFrame = performance.now();
 
-    /* Update hero info */
-    document.getElementById('heroName').textContent = eff.name;
-    document.getElementById('heroDesc').textContent = eff.desc;
-    document.getElementById('heroCat').textContent  = CAT_LABEL[eff.cat] || eff.cat;
-
-    /* Update list highlight */
-    for (const [cid, cs] of cards.entries()) {
-        cs.row.classList.toggle('selected', cid === id);
-    }
+    updateHeroInfo();
+    updateSelectionVisuals();
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
+function selectColor(hex) {
+    state.selection = { type: 'color', hex };
+    saveState();
+    ccInput.value = hex;
+    updateColorSwatch();
+    updateHeroInfo();
+    updateSelectionVisuals();
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    THEME
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
 const themeIcon = document.getElementById('themeIcon');
 function applyTheme() {
     document.documentElement.dataset.theme = state.theme;
@@ -1692,9 +1670,9 @@ document.getElementById('themeBtn').addEventListener('click', () => {
     applyTheme(); saveState();
 });
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    CATEGORIES
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
 let activeCat = 'all';
 function buildCategoryBar() {
     const bar = document.getElementById('catBar');
@@ -1720,9 +1698,9 @@ function applyFilter() {
     }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    BUILD LIST
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
 function buildList() {
     const list = document.getElementById('list');
     list.innerHTML = '';
@@ -1732,12 +1710,11 @@ function buildList() {
         cards.set(eff.id, cs);
         list.appendChild(cs.row);
     }
-    selectEffect(state.selectedId);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    BRIGHTNESS
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
 function bindBrightness() {
     const slider = document.getElementById('brightness');
     slider.value = state.brightness;
@@ -1749,13 +1726,29 @@ function bindBrightness() {
     });
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    NFC SYNC
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
+function buildPayload() {
+    const base = {
+        cmd: 'cfg',
+        br:  state.brightness,
+        t:   Date.now(),
+    };
+
+    if (state.selection.type === 'effect') {
+        return { ...base, sel: state.selection.id };
+    } else {
+        const { r, g, b } = hexToRgb(state.selection.hex);
+        return { ...base, sel: 'custom', r, g, b };
+    }
+}
+
 const syncModal = document.getElementById('syncModal');
 const syncTitle = document.getElementById('syncTitle');
 const syncMsg   = document.getElementById('syncMsg');
 let nfcAbort = null;
+
 function openSyncModal(t, m) {
     syncTitle.textContent = t; syncMsg.textContent = m;
     syncModal.classList.add('open');
@@ -1767,12 +1760,7 @@ function closeSyncModal() {
 document.getElementById('syncCancel').addEventListener('click', closeSyncModal);
 
 document.getElementById('syncBtn').addEventListener('click', async () => {
-    const payload = {
-        cmd: 'cfg',
-        sel: state.selectedId,
-        br:  state.brightness,
-        t:   Date.now(),
-    };
+    const payload = buildPayload();
 
     if (!('NDEFReader' in window)) {
         toast('Saved locally (NFC unavailable here)');
@@ -1790,21 +1778,22 @@ document.getElementById('syncBtn').addEventListener('click', async () => {
                 data: new TextEncoder().encode(JSON.stringify(payload)),
             }],
         }, { signal: nfcAbort.signal });
+
         syncTitle.textContent = 'Sent';
         syncMsg.textContent = 'Configuration transmitted successfully.';
-        setTimeout(closeSyncModal, 900);
+        setTimeout(closeSyncModal, 150);
         toast('Sent to device');
     } catch (e) {
         if (e.name === 'AbortError') { closeSyncModal(); return; }
         syncTitle.textContent = 'Sync Failed';
         syncMsg.textContent = e.message || 'Could not write to the device.';
-        setTimeout(closeSyncModal, 2200);
+        setTimeout(closeSyncModal, 1800);
     }
 });
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    TOAST
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
 let toastTimer = null;
 function toast(msg) {
     const t = document.getElementById('toast');
@@ -1814,15 +1803,29 @@ function toast(msg) {
     toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    BOOT
-   ═══════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════ */
 function boot() {
     loadState();
     applyTheme();
     buildCategoryBar();
     buildList();
     bindBrightness();
+
+    /* Sync the UI to whatever selection we loaded */
+    if (state.selection.type === 'color') {
+        ccInput.value = state.selection.hex;
+        updateColorSwatch();
+    } else {
+        const eff = EFFECTS.find(e => e.id === state.selection.id);
+        heroFn = eff ? eff.fn : F.aurora;
+        ccInput.value = '#ff8040';   /* sensible default if user switches to color */
+        updateColorSwatch();
+    }
+    updateHeroInfo();
+    updateSelectionVisuals();
+
     requestAnimationFrame(animationLoop);
 }
 boot();
